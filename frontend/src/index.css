@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 220 25% 97%;
+  --foreground: 222 30% 12%;
+  --surface: 0 0% 100%;
+  --surface-2: 220 20% 96%;
+  --border: 220 15% 88%;
+  --muted: 220 15% 94%;
+  --muted-foreground: 220 10% 45%;
+  --primary: 245 75% 59%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 245 75% 59%;
+  --accent-foreground: 0 0% 100%;
+  --success: 152 60% 40%;
+  --warning: 38 92% 50%;
+  --danger: 0 72% 51%;
+  --genie: 258 90% 66%;
+  --genie-glow: 270 95% 75%;
+}
+
+.dark {
+  --background: 224 32% 8%;
+  --foreground: 220 20% 92%;
+  --surface: 224 28% 11%;
+  --surface-2: 224 24% 14%;
+  --border: 224 18% 20%;
+  --muted: 224 20% 16%;
+  --muted-foreground: 220 12% 60%;
+  --primary: 245 85% 68%;
+  --primary-foreground: 224 32% 8%;
+  --accent: 245 85% 68%;
+  --accent-foreground: 224 32% 8%;
+  --success: 152 55% 48%;
+  --warning: 38 92% 55%;
+  --danger: 0 78% 62%;
+  --genie: 258 95% 72%;
+  --genie-glow: 270 100% 80%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  @apply bg-background text-foreground font-body antialiased;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+h1, h2, h3, h4 {
+  @apply font-display;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 999px;
+}
+
+.genie-glow-border {
+  position: relative;
+}
+.genie-glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, hsl(var(--genie)), hsl(var(--genie-glow)), hsl(var(--genie)));
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genie-glow-border::before {
+    animation: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
